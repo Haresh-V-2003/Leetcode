@@ -1,4 +1,4 @@
-Given an array of integers citations where citations[i] is the number of citations a researcher received for their ith paper, return the researcher's h-index.
+'''Given an array of integers citations where citations[i] is the number of citations a researcher received for their ith paper, return the researcher's h-index.
 
 According to the definition of h-index on Wikipedia: The h-index is defined as the maximum value of h such that the given researcher has published at least h papers that have each been cited at least h times.
 
@@ -21,3 +21,17 @@ Constraints:
 n == citations.length
 1 <= n <= 5000
 0 <= citations[i] <= 1000
+
+Solution:'''
+class Solution:
+    def hIndex(self, citations: List[int]) -> int:
+        n=len(citations)
+        papercount=[0]*(n+1)
+        for c in citations:
+            papercount[min(n,c)]+=1
+        h=n
+        papers=papercount[n]
+        while papers<h:
+            h-=1
+            papers+=papercount[h]
+        return h
