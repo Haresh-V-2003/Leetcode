@@ -1,4 +1,4 @@
-The string "PAYPALISHIRING" is written in a zigzag pattern on a given number of rows like this: (you may want to display this pattern in a fixed font for better legibility)
+'''The string "PAYPALISHIRING" is written in a zigzag pattern on a given number of rows like this: (you may want to display this pattern in a fixed font for better legibility)
 
 P   A   H   N
 A P L S I I G
@@ -34,3 +34,23 @@ Constraints:
 1 <= s.length <= 1000
 s consists of English letters (lower-case and upper-case), ',' and '.'.
 1 <= numRows <= 1000
+
+Solution:'''
+class Solution:
+    def convert(self, s: str, numRows: int) -> str:
+        if numRows == 1:
+            return s
+        i = 0
+        d = 1
+        rows = [[] for _ in range(numRows)]
+        ret = ''
+        for char in s:
+            rows[i].append(char)
+            if i == 0:
+                d = 1
+            if i == numRows - 1:
+                d = -1
+            i+=d
+        for i in range(numRows):
+            ret+= ''.join(rows[i])
+        return ret
