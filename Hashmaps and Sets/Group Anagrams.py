@@ -1,4 +1,4 @@
-Given an array of strings strs, group the 
+'''Given an array of strings strs, group the 
 anagrams
  together. You can return the answer in any order.
 
@@ -34,3 +34,16 @@ Constraints:
 1 <= strs.length <= 104
 0 <= strs[i].length <= 100
 strs[i] consists of lowercase English letters.
+
+Solution:'''
+from collections import defaultdict
+class Solution:
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        anagram_dict=defaultdict(list)
+        for s in strs:
+            count=[0]*26
+            for c in s:
+                count[ord(c)-ord('a')]+=1
+            key=tuple(count)
+            anagram_dict[key].append(s)
+        return anagram_dict.values()
