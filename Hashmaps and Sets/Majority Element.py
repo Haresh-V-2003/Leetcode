@@ -1,4 +1,4 @@
-Given an array nums of size n, return the majority element.
+'''Given an array nums of size n, return the majority element.
 
 The majority element is the element that appears more than ⌊n / 2⌋ times. You may assume that the majority element always exists in the array.
 
@@ -19,3 +19,29 @@ Constraints:
 n == nums.length
 1 <= n <= 5 * 104
 -109 <= nums[i] <= 109
+Solution:'''
+class Solution:
+    def majorityElement(self, nums: List[int]) -> int:
+        '''h={}
+        for i in nums:
+            if i in h:
+                h[i]+=1
+            else:
+                h[i]=1
+        maxcount=-1
+        ans=-1
+        for key,val in h.items():
+            if val>maxcount:
+                maxcount=val
+                ans=key
+        return ans'''
+        ans=-1
+        count=0
+        for num in nums:
+            if count==0:
+                ans=num
+            if ans==num:
+                count+=1
+            else:
+                count-=1
+        return ans
