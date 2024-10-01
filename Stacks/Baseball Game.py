@@ -1,4 +1,4 @@
-You are keeping the scores for a baseball game with strange rules. At the beginning of the game, you start with an empty record.
+'''You are keeping the scores for a baseball game with strange rules. At the beginning of the game, you start with an empty record.
 
 You are given a list of strings operations, where operations[i] is the ith operation you must apply to the record and is one of the following:
 
@@ -57,3 +57,18 @@ Constraints:
 operations[i] is "C", "D", "+", or a string representing an integer in the range [-3 * 104, 3 * 104].
 For operation "+", there will always be at least two previous scores on the record.
 For operations "C" and "D", there will always be at least one previous score on the record.
+
+Solution:'''
+class Solution:
+    def calPoints(self, operations: List[str]) -> int:
+        stk=[]
+        for op in operations:
+            if op=='+':
+                stk.append(stk[-1]+stk[-2])
+            elif op=='D':
+                stk.append(stk[-1]*2)
+            elif op=='C':
+                stk.pop()
+            else:
+                stk.append(int(op))
+        return sum(stk)
