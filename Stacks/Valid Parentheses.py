@@ -1,4 +1,4 @@
-Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+'''Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
 
 An input string is valid if:
 
@@ -37,3 +37,20 @@ Constraints:
 
 1 <= s.length <= 104
 s consists of parentheses only '()[]{}'.
+
+Solution:'''
+class Solution:
+    def isValid(self, s: str) -> bool:
+        stk=[]
+        hashmap={'}':'{',')':'(',']':'['}
+        for c in s:
+            if c not in hashmap:
+                stk.append(c)
+            else:
+                if not stk:
+                    return False
+                else:
+                    popped=stk.pop()
+                    if popped != hashmap[c]:
+                        return False
+        return not stk
