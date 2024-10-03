@@ -1,4 +1,4 @@
-You are given an array of strings tokens that represents an arithmetic expression in a Reverse Polish Notation.
+'''You are given an array of strings tokens that represents an arithmetic expression in a Reverse Polish Notation.
 
 Evaluate the expression. Return an integer that represents the value of the expression.
 
@@ -39,3 +39,27 @@ Constraints:
 
 1 <= tokens.length <= 104
 tokens[i] is either an operator: "+", "-", "*", or "/", or an integer in the range [-200, 200].
+
+Solution:'''
+from math import floor,ceil
+class Solution:
+    def evalRPN(self, tokens: List[str]) -> int:
+        stk=[]
+        for t in tokens:
+            if t in '+-*/':
+                b,a=stk.pop(),stk.pop()
+                if t=='+':
+                    stk.append(a+b)
+                if t=='-':
+                    stk.append(a-b)
+                if t=='*':
+                    stk.append(a*b)
+                if t=='/':
+                    division=a/b
+                    if division<0:
+                        stk.append(ceil(division))
+                    else:
+                        stk.append(floor(division))
+            else:
+                stk.append(int(t))
+        return stk[0]
