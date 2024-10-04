@@ -1,4 +1,4 @@
-Given an array of integers temperatures represents the daily temperatures, return an array answer such that answer[i] is the number of days you have to wait after the ith day to get a warmer temperature. If there is no future day for which this is possible, keep answer[i] == 0 instead.
+'''Given an array of integers temperatures represents the daily temperatures, return an array answer such that answer[i] is the number of days you have to wait after the ith day to get a warmer temperature. If there is no future day for which this is possible, keep answer[i] == 0 instead.
 
  
 
@@ -20,3 +20,16 @@ Constraints:
 
 1 <= temperatures.length <= 105
 30 <= temperatures[i] <= 100
+
+Solution:'''
+class Solution:
+    def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
+        stk=[]
+        n=len(temperatures)
+        ans=[0]*n
+        for i,t in enumerate(temperatures):
+            while stk and stk[-1][0]<t:
+                stk_t,stk_i=stk.pop()
+                ans[stk_i]=i-stk_i
+            stk.append((t,i))
+        return ans
