@@ -1,4 +1,4 @@
-Given an array of integers heights representing the histogram's bar height where the width of each bar is 1, return the area of the largest rectangle in the histogram.
+'''Given an array of integers heights representing the histogram's bar height where the width of each bar is 1, return the area of the largest rectangle in the histogram.
 
  
 
@@ -20,3 +20,24 @@ Constraints:
 
 1 <= heights.length <= 105
 0 <= heights[i] <= 104
+
+Solution:'''
+class Solution:
+    def largestRectangleArea(self, heights: List[int]) -> int:
+        n=len(heights)
+        stk=[]
+        maxarea=0
+        for i,height in enumerate(heights):
+            start=i
+            while stk and height<stk[-1][0]:
+                h,j=stk.pop()
+                w=i-j
+                a=w*h
+                maxarea=max(maxarea,a)
+                start=j
+            stk.append((height,start))
+        while stk:
+            h,j=stk.pop()
+            w=n-j
+            maxarea=max(maxarea,h*w)
+        return maxarea
