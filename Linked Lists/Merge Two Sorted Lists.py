@@ -1,4 +1,4 @@
-You are given the heads of two sorted linked lists list1 and list2.
+'''You are given the heads of two sorted linked lists list1 and list2.
 
 Merge the two lists into one sorted list. The list should be made by splicing together the nodes of the first two lists.
 
@@ -26,3 +26,25 @@ Constraints:
 The number of nodes in both lists is in the range [0, 50].
 -100 <= Node.val <= 100
 Both list1 and list2 are sorted in non-decreasing order.
+
+Solution:'''
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
+        d=ListNode()
+        cur=d
+        while list1 and list2:
+            if list1.val<list2.val:
+                cur.next=list1
+                cur=list1
+                list1=list1.next
+            else:
+                cur.next=list2
+                cur=list2
+                list2=list2.next
+        cur.next=list1 if list1 else list2
+        return d.next
