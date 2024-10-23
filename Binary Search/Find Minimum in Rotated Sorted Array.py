@@ -1,4 +1,4 @@
-Suppose an array of length n sorted in ascending order is rotated between 1 and n times. For example, the array nums = [0,1,2,4,5,6,7] might become:
+'''Suppose an array of length n sorted in ascending order is rotated between 1 and n times. For example, the array nums = [0,1,2,4,5,6,7] might become:
 
 [4,5,6,7,0,1,2] if it was rotated 4 times.
 [0,1,2,4,5,6,7] if it was rotated 7 times.
@@ -34,3 +34,19 @@ n == nums.length
 -5000 <= nums[i] <= 5000
 All the integers of nums are unique.
 nums is sorted and rotated between 1 and n times.
+
+Solution:'''
+class Solution:
+    def findMin(self, nums: List[int]) -> int:
+        n=len(nums)
+        l=0
+        r=n-1
+        #here we dont use l<=r but use l<r so that the minimum can be found when l==r
+        while l<r:
+            m=(l+r)//2
+            if nums[m]>nums[r]:
+                l=m+1
+            else:
+                r=m
+        #both nums[l] and nums[r] have the same element so we return any one
+        return nums[l]
