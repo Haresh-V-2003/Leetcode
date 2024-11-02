@@ -1,4 +1,4 @@
-Given a string s, find the length of the longest 
+'''Given a string s, find the length of the longest 
 substring
  without repeating characters.
 
@@ -26,3 +26,19 @@ Constraints:
 
 0 <= s.length <= 5 * 104
 s consists of English letters, digits, symbols and spaces.
+
+Solution:'''
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        n=len(s)
+        l=0
+        maxsubstr=0
+        sett=set()
+        for r in range(n):
+            while s[r] in sett:
+                sett.remove(s[l])
+                l+=1
+            substr=(r-l)+1
+            maxsubstr=max(maxsubstr,substr)
+            sett.add(s[r])
+        return maxsubstr
