@@ -21,3 +21,27 @@ The number of nodes in the tree is in the range [1, 104].
 -231 <= Node.val <= 231 - 1
 
 Solution:'''
+from collections import deque
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def averageOfLevels(self, root: Optional[TreeNode]) -> List[float]:
+        if not root:
+            return None
+        queue=deque()
+        ans=[]
+        queue.append(root)
+        while queue:
+            level=[]
+            n=len(queue)
+            for i in range(n):
+                node=queue.popleft()
+                level.append(node.val)
+                if node.left: queue.append(node.left)
+                if node.right: queue.append(node.right)
+            ans.append(sum(level)/n)
+        return ans
