@@ -1,4 +1,4 @@
-Given the root of a binary tree, determine if it is a valid binary search tree (BST).
+'''Given the root of a binary tree, determine if it is a valid binary search tree (BST).
 
 A valid BST is defined as follows:
 
@@ -26,3 +26,20 @@ Constraints:
 
 The number of nodes in the tree is in the range [1, 104].
 -231 <= Node.val <= 231 - 1
+
+Solution:'''
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def isValidBST(self, root: Optional[TreeNode]) -> bool:
+        def isvalid(root,minn,maxx):
+            if not root:
+                return True
+            if root.val<=minn or root.val>=maxx:
+                return False
+            return isvalid(root.left,minn,root.val) and isvalid(root.right,root.val,maxx)
+        return isvalid(root,float('-inf'),float('inf'))
