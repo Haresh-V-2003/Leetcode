@@ -31,3 +31,18 @@ Constraints:
 1 <= stones[i] <= 1000
 
 Solution:'''
+import heapq
+class Solution:
+    def lastStoneWeight(self, stones: List[int]) -> int:
+        for i in range(len(stones)):
+            stones[i]=-stones[i]
+        heapq.heapify(stones)
+        while len(stones)>1:
+            largest=heapq.heappop(stones)
+            nextlargest=heapq.heappop(stones)
+            if largest!=nextlargest:
+                heapq.heappush(stones,largest-nextlargest)
+        if len(stones)==1:
+            return -heapq.heappop(stones)
+        else:
+            return 0
